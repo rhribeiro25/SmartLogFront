@@ -38,3 +38,8 @@ ENTREGAS
 
 (3) Esquema do PostgreSQL usado para os dados de log.
 
+Detalhes do desenvolvimento
+--------
+Utilizar a autenticação abaixo diretamente no navegador:
+User: admin
+password: smartLog2020
