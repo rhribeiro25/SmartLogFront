@@ -41,5 +41,5 @@ ENTREGAS
 Detalhes do desenvolvimento
 --------
 Utilizar a autenticação abaixo diretamente no navegador:
-User: admin
-password: smartLog2020
+- User: admin
+- password: smartLog2020
