@@ -36,7 +36,7 @@ export class LogsListaComponent implements OnInit {
   }
 
   onRefresh() {
-    this.logs$ = this.service.list().pipe(
+    this.logs$ = this.service.findAll().pipe(
       catchError(error => {
         console.error(error);
         this.handleError();
@@ -46,7 +46,7 @@ export class LogsListaComponent implements OnInit {
   }
 
   handleError() {
-    this.alertService.showAlertDanger("Erro ao carregar logs. Tente novamente mais tarde.");
+    this.alertService.showAlertDanger("Erro ao carregar logs. Tente novamente mais tarde!");
   }
 
   onEdit(id) {
@@ -64,11 +64,12 @@ export class LogsListaComponent implements OnInit {
         switchMap(result => (result ? this.service.remove(log.id) : EMPTY))
       )
       .subscribe(
+        error => {
+          this.alertService.showAlertDanger("Erro ao remover log. Tente novamente mais tarde!");
+        },
         success => {
           this.onRefresh();
-        },
-        error => {
-          this.alertService.showAlertDanger("Erro ao remover log. Tente novamente mais tarde.");
+          this.alertService.showAlertSuccess("Sucesso ao remover log!");
         }
       );
   }
@@ -80,7 +81,7 @@ export class LogsListaComponent implements OnInit {
         this.deleteModalRef.hide();
       },
       error => {
-        this.alertService.showAlertDanger("Erro ao remover log. Tente novamente mais tarde.");
+        this.alertService.showAlertDanger("Erro ao remover log. Tente novamente mais tarde!");
         this.deleteModalRef.hide();
       }
     );

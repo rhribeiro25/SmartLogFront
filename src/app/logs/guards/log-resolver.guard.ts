@@ -12,7 +12,7 @@ export class LogResolverGuard implements Resolve<Log> {
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<Log> {
     if (route.params && route.params["id"]) {
-      return this.service.loadByID(route.params["id"]);
+      return this.service.findByID(route.params["id"]);
     }
 
     return of({

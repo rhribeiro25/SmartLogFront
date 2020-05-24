@@ -27,7 +27,10 @@ export class LogsFormComponent implements OnInit {
 
     this.form = this.fb.group({
       id: [log.id],
-      nome: [log.nome, [Validators.required, Validators.minLength(3), Validators.maxLength(250)]]
+      ip: [log.ip, [Validators.required, Validators.minLength(9), Validators.maxLength(15)]],
+      request: [log.request, [Validators.required, Validators.minLength(10), Validators.maxLength(32)]],
+      status: [log.status, [Validators.required, Validators.minLength(3), Validators.pattern("[0-9]*")]],
+      userAgent: [log.userAgent, [Validators.required, Validators.minLength(10), Validators.maxLength(128)]]
     });
   }
 

@@ -4,14 +4,14 @@ import { delay, tap, take } from "rxjs/operators";
 export class CrudService<T> {
   constructor(protected http: HttpClient, private API_URL) {}
 
-  list() {
+  findAll() {
     return this.http.get<T[]>(`${this.API_URL}/find-all`).pipe(
       delay(2000),
       tap(console.log)
     );
   }
 
-  loadByID(id) {
+  findByID(id) {
     return this.http.get<T>(`${this.API_URL}/find-by-id/${id}`).pipe(take(1));
   }
 
@@ -31,6 +31,6 @@ export class CrudService<T> {
   }
 
   remove(id) {
-    return this.http.delete(`${this.API_URL}/remove/${id}`).pipe(take(1));
+    return this.http.delete(`${this.API_URL}/delete/${id}`).pipe(take(1));
   }
 }
