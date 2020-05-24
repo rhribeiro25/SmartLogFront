@@ -92,6 +92,6 @@ export class LogsListaComponent implements OnInit {
   }
 
   formatingDate_DD_MM_AAAA(date: Date) {
-    return moment(date).format("MM/DD/YYYY");
+    return moment(date).format("DD/MM/YYYY");
   }
 }

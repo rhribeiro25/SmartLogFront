@@ -27,10 +27,11 @@ export class LogsFormComponent implements OnInit {
 
     this.form = this.fb.group({
       id: [log.id],
+      createdAt: [log.createdAt],
       ip: [log.ip, [Validators.required, Validators.minLength(9), Validators.maxLength(15)]],
       request: [log.request, [Validators.required, Validators.minLength(10), Validators.maxLength(32)]],
       status: [log.status, [Validators.required, Validators.minLength(3), Validators.pattern("[0-9]*")]],
-      userAgent: [log.userAgent, [Validators.required, Validators.minLength(10), Validators.maxLength(128)]]
+      userAgent: [log.userAgent, [Validators.required, Validators.minLength(24), Validators.maxLength(512)]]
     });
   }
 
@@ -50,7 +51,6 @@ export class LogsFormComponent implements OnInit {
         msgSuccess = "Log atualizado com sucesso!";
         msgError = "Erro ao atualizar log, tente novamente!";
       }
-
       this.service.save(this.form.value).subscribe(
         success => {
           this.modal.showAlertSuccess(msgSuccess);
@@ -64,5 +64,6 @@ export class LogsFormComponent implements OnInit {
   onCancel() {
     this.submitted = false;
     this.form.reset();
+    this.location.back();
   }
 }

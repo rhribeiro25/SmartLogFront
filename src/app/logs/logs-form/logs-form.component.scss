@@ -1,16 +1,7 @@
 #form-content {
-  position: relative;
-  width: 60%;
   margin: auto;
-  padding: 0.75rem 1.25rem;
   margin-bottom: 0;
-  height: 100%;
-  border: 1px solid rgba(0, 0, 0, 0.125);
-}
-
-#log-form {
-  height: 800px;
-  min-height: 800px;
+  height: 800px !important;
 }
 
 #log-form-actions {
@@ -26,19 +17,8 @@
 
 #log-form-header {
   text-align: center;
-  padding: 0.75rem 1.25rem;
-  margin-bottom: 0;
-  background-color: rgba(0, 0, 0, 0.03);
-  border-bottom: 1px solid rgba(0, 0, 0, 0.125);
-  margin-bottom: 30px;
 }
 
-#log-form-header #id {
-  position: absolute;
-  right: 25px;
-  width: 10px;
-  height: 30px;
-  line-height: 30px;
-  background-color: rgb(247, 247, 247) !important;
-  border-color: rgba(247, 247, 247);
+#form-content #save {
+  margin-right: 5px;
 }

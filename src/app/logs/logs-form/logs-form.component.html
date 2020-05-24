@@ -1,99 +1,100 @@
-<form id="log-form" class="needs-validation" novalidate [formGroup]="form" style="padding-top: 10px">
-  <div id="form-content">
-    <div id="log-form-header" class="form-row">
-      <div class="col-sm-12">
-        <h4><input disabled type="text" class="form-control" id="id" formControlName="status" /></h4>
-        <h4><label id="title">Formulário de Log</label></h4>
-      </div>
-    </div>
-    <div class="form-row">
-      <div class="col-sm-6">
-        <label for="ip">IP</label>
-        <input
-          type="text"
-          class="form-control"
-          id="ip"
-          placeholder="192.168.0.100"
-          formControlName="ip"
-          [ngClass]="{ 'is-invalid': submitted && hasError('ip') }"
-        />
-        <div class="invalid-feedback" *ngIf="hasError('ip') && hasError('ip')['required']">
-          Por favor informe um ip para o log.
-        </div>
-        <div class="invalid-feedback" *ngIf="hasError('ip') && hasError('ip')['minlength']">
-          O IP precisa ter no mínimo {{ hasError("ip")["minlength"].requiredLength }} caracteres.
-        </div>
-        <div class="invalid-feedback" *ngIf="hasError('ip') && hasError('ip')['maxlength']">
-          O IP precisa ter no máximo {{ hasError("ip")["maxlength"].requiredLength }} caracteres.
-        </div>
-      </div>
-      <div class="col-sm-6">
-        <label for="request">Request</label>
-        <input
-          type="text"
-          class="form-control"
-          id="request"
-          placeholder="GET / HTTP/1.1"
-          formControlName="request"
-          [ngClass]="{ 'is-invalid': submitted && hasError('request') }"
-        />
-        <div class="invalid-feedback" *ngIf="hasError('request') && hasError('request')['required']">
-          Por favor informe uma requisição para o log.
-        </div>
-        <div class="invalid-feedback" *ngIf="hasError('request') && hasError('request')['minlength']">
-          A requisição precisa ter no mínimo {{ hasError("request")["minlength"].requiredLength }} caracteres.
-        </div>
-        <div class="invalid-feedback" *ngIf="hasError('request') && hasError('request')['maxlength']">
-          A requisição precisa ter no máximo {{ hasError("request")["maxlength"].requiredLength }} caracteres.
-        </div>
-      </div>
-    </div>
-
-    <div class="form-row">
-      <div class="col-sm-6">
-        <label for="status">Status</label>
-        <input
-          type="text"
-          class="form-control"
-          id="status"
-          placeholder="201"
-          formControlName="status"
-          [ngClass]="{ 'is-invalid': submitted && hasError('status') }"
-        />
-        <div class="invalid-feedback" *ngIf="hasError('status') && hasError('status')['required']">
-          Por favor informe um status para o log.
-        </div>
-        <div
-          class="invalid-feedback"
-          *ngIf="hasError('status') && (hasError('status')['minlength'] || hasError('status')['pattern'])"
-        >
-          O status precisa ter {{ hasError("status")["minlength"].requiredLength }} caracteres numéricos.
-        </div>
-      </div>
-      <div class="col-sm-6">
-        <label for="userAgent">User Agent</label>
-        <input
-          type="text"
-          class="form-control"
-          id="userAgent"
-          placeholder="Mozilla/5.0 (Windows NT 6.2; WOW64)..."
-          formControlName="userAgent"
-          [ngClass]="{ 'is-invalid': submitted && hasError('userAgent') }"
-        />
-        <div class="invalid-feedback" *ngIf="hasError('userAgent') && hasError('userAgent')['required']">
-          Por favor informe um agente para o log.
-        </div>
-        <div class="invalid-feedback" *ngIf="hasError('userAgent') && hasError('userAgent')['minlength']">
-          O agente precisa ter no mínimo {{ hasError("userAgent")["minlength"].requiredLength }} caracteres.
-        </div>
-        <div class="invalid-feedback" *ngIf="hasError('userAgent') && hasError('userAgent')['maxlength']">
-          O agente precisa ter no máximo {{ hasError("userAgent")["maxlength"].requiredLength }} caracteres.
-        </div>
-      </div>
-    </div>
-    <div id="log-form-actions">
-      <button type="sumit" class="btn btn-primary" (click)="onSubmit()">Salvar</button>
-      <button type="button" class="btn btn-light" (click)="onCancel()">Cancelar</button>
-    </div>
+<div id="log-form" class="card mt-3">
+  <div id="log-form-header" class="card-header">
+    <div><h4>Formulário de Log</h4></div>
   </div>
-</form>
+  <div id="log-list-body" class="card-body">
+    <form id="log-form" class="needs-validation" novalidate [formGroup]="form" style="padding-top: 10px">
+      <div id="form-content">
+        <div class="form-row">
+          <div class="col-sm-6">
+            <label for="ip">IP</label>
+            <input
+              type="text"
+              class="form-control"
+              id="ip"
+              placeholder="192.168.0.100"
+              formControlName="ip"
+              [ngClass]="{ 'is-invalid': submitted && hasError('ip') }"
+            />
+            <div class="invalid-feedback" *ngIf="hasError('ip') && hasError('ip')['required']">
+              Por favor informe um ip para o log.
+            </div>
+            <div class="invalid-feedback" *ngIf="hasError('ip') && hasError('ip')['minlength']">
+              O IP precisa ter no mínimo {{ hasError("ip")["minlength"].requiredLength }} caracteres.
+            </div>
+            <div class="invalid-feedback" *ngIf="hasError('ip') && hasError('ip')['maxlength']">
+              O IP precisa ter no máximo {{ hasError("ip")["maxlength"].requiredLength }} caracteres.
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <label for="request">Request</label>
+            <input
+              type="text"
+              class="form-control"
+              id="request"
+              placeholder="GET / HTTP/1.1"
+              formControlName="request"
+              [ngClass]="{ 'is-invalid': submitted && hasError('request') }"
+            />
+            <div class="invalid-feedback" *ngIf="hasError('request') && hasError('request')['required']">
+              Por favor informe uma requisição para o log.
+            </div>
+            <div class="invalid-feedback" *ngIf="hasError('request') && hasError('request')['minlength']">
+              A requisição precisa ter no mínimo {{ hasError("request")["minlength"].requiredLength }} caracteres.
+            </div>
+            <div class="invalid-feedback" *ngIf="hasError('request') && hasError('request')['maxlength']">
+              A requisição precisa ter no máximo {{ hasError("request")["maxlength"].requiredLength }} caracteres.
+            </div>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="col-sm-6">
+            <label for="status">Status</label>
+            <input
+              type="text"
+              class="form-control"
+              id="status"
+              placeholder="201"
+              formControlName="status"
+              [ngClass]="{ 'is-invalid': submitted && hasError('status') }"
+            />
+            <div class="invalid-feedback" *ngIf="hasError('status') && hasError('status')['required']">
+              Por favor informe um status para o log.
+            </div>
+            <div
+              class="invalid-feedback"
+              *ngIf="hasError('status') && (hasError('status')['minlength'] || hasError('status')['pattern'])"
+            >
+              O status precisa ter {{ hasError("status")["minlength"].requiredLength }} caracteres numéricos.
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <label for="userAgent">User Agent</label>
+            <input
+              type="text"
+              class="form-control"
+              id="userAgent"
+              placeholder="Mozilla/5.0 (Windows NT 6.2; WOW64)..."
+              formControlName="userAgent"
+              [ngClass]="{ 'is-invalid': submitted && hasError('userAgent') }"
+            />
+            <div class="invalid-feedback" *ngIf="hasError('userAgent') && hasError('userAgent')['required']">
+              Por favor informe um agente para o log.
+            </div>
+            <div class="invalid-feedback" *ngIf="hasError('userAgent') && hasError('userAgent')['minlength']">
+              O agente precisa ter no mínimo {{ hasError("userAgent")["minlength"].requiredLength }} caracteres.
+            </div>
+            <div class="invalid-feedback" *ngIf="hasError('userAgent') && hasError('userAgent')['maxlength']">
+              O agente precisa ter no máximo {{ hasError("userAgent")["maxlength"].requiredLength }} caracteres.
+            </div>
+          </div>
+        </div>
+        <div id="log-form-actions">
+          <button id="save" type="sumit" class="btn btn-primary" (click)="onSubmit()">Salvar</button>
+          <button id="cancel" type="button" class="btn btn-secondary" (click)="onCancel()">Cancelar</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

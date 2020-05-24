@@ -3,10 +3,38 @@
 }
 
 #log-table .float-right {
-  width: 71%;
+  width: 175px;
   float: none !important;
 }
 
 #log-table #actions {
-  width: 11%;
+  width: 175px;
+}
+
+#log-table #request {
+  width: 135px;
+}
+
+#log-list #log-list-body {
+  min-height: 850px !important;
+}
+
+#log-list-header {
+  text-align: center;
+  padding: 0.75rem 1.25rem;
+  margin-bottom: 0;
+  background-color: rgba(0, 0, 0, 0.03);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+}
+
+#log-list-header #log-list-actions {
+  width: 200px;
+  height: 55px;
+  line-height: 55px;
+  text-align: center;
+  cursor: pointer;
+  position: absolute;
+  top: 1px;
+  right: 5px;
+  padding-left: 10px;
 }
