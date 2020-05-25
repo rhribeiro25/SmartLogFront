@@ -5,10 +5,7 @@ export class CrudService<T> {
   constructor(protected http: HttpClient, private API_URL) {}
 
   findAll() {
-    return this.http.get<T[]>(`${this.API_URL}/find-all`).pipe(
-      delay(2000),
-      tap(console.log)
-    );
+    return this.http.get<T[]>(`${this.API_URL}/find-all`).pipe(delay(2000));
   }
 
   findByID(id) {

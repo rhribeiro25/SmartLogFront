@@ -1,12 +1,13 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
+import { FormControl } from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";
-import { BsModalRef, BsModalService } from "ngx-bootstrap/modal";
-import { empty, EMPTY, Observable, Subject } from "rxjs";
-import { catchError, switchMap, take } from "rxjs/operators";
+import { BsModalRef } from "ngx-bootstrap/modal";
+import { EMPTY, Observable, Subject, Subscriber, Subscription } from "rxjs";
+import { catchError, debounceTime, distinctUntilChanged, map, switchMap, take } from "rxjs/operators";
+import UtilsService from "src/app/shared/utils.service";
 import { AlertModalService } from "../../shared/alert-modal.service";
 import { Log } from "../log";
 import { LogsService } from "../logs.service";
-import * as moment from "moment";
 
 @Component({
   selector: "app-logs-lista",
@@ -17,15 +18,16 @@ import * as moment from "moment";
 export class LogsListaComponent implements OnInit {
   deleteModalRef: BsModalRef;
   @ViewChild("deleteModal", { static: true }) deleteModal;
-
+  @ViewChild("refresh") refresh;
   logs$: Observable<Log[]>;
   error$ = new Subject<boolean>();
-
   logSelecionado: Log;
+
+  params = new FormControl();
 
   constructor(
     private service: LogsService,
-    private modalService: BsModalService,
+    private utils: UtilsService,
     private alertService: AlertModalService,
     private router: Router,
     private route: ActivatedRoute
@@ -35,14 +37,37 @@ export class LogsListaComponent implements OnInit {
     this.onRefresh();
   }
 
+  onSearchReactive() {
+    this.logs$ = this.params.valueChanges.pipe(
+      map(value => value.trim()),
+      debounceTime(200),
+      distinctUntilChanged(),
+      switchMap(value => this.service.findByParams(value))
+    );
+  }
+
   onRefresh() {
+    this.params.setValue("");
     this.logs$ = this.service.findAll().pipe(
       catchError(error => {
         console.error(error);
         this.handleError();
-        return empty();
+        return EMPTY;
       })
     );
+  }
+
+  onSearch() {
+    let value = this.params.value;
+    if (value && (value = value.trim()) !== "") {
+      this.logs$ = this.service.findByParams(value).pipe(
+        catchError(error => {
+          console.error(error);
+          this.handleError();
+          return EMPTY;
+        })
+      );
+    }
   }
 
   handleError() {
@@ -89,9 +114,5 @@ export class LogsListaComponent implements OnInit {
 
   onDeclineDelete() {
     this.deleteModalRef.hide();
-  }
-
-  formatingDate_DD_MM_AAAA(date: Date) {
-    return moment(date).format("DD/MM/YYYY");
   }
 }

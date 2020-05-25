@@ -2,13 +2,19 @@
   width: auto;
 }
 
-#log-table .float-right {
-  width: 175px;
-  float: none !important;
+#log-table #actions {
+  width: 100px;
 }
 
-#log-table #actions {
-  width: 175px;
+#log-table #log-table-actions-line {
+  width: 100px;
+  height: 42px;
+  line-height: 42px;
+  text-align: center;
+  cursor: pointer;
+  position: absolute;
+  right: 5px;
+  padding-left: 10px;
 }
 
 #log-table #request {
@@ -16,7 +22,7 @@
 }
 
 #log-list #log-list-body {
-  min-height: 850px !important;
+  min-height: 700px !important;
 }
 
 #log-list-header {
@@ -29,12 +35,22 @@
 
 #log-list-header #log-list-actions {
   width: 200px;
-  height: 55px;
-  line-height: 55px;
   text-align: center;
   cursor: pointer;
   position: absolute;
-  top: 1px;
+  top: 10px;
   right: 5px;
   padding-left: 10px;
+}
+
+#log-list-body #log-list-actions-search {
+  text-align: center;
+  cursor: pointer;
+  position: absolute;
+  right: 5px;
+  padding-left: 10px;
+}
+
+#log-list-body #log-list-panel-search {
+  margin-bottom: 20px;
 }

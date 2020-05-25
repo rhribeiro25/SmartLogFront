@@ -7,6 +7,23 @@
     </div>
   </div>
   <div id="log-list-body" class="card-body">
+    <div id="log-list-panel-search" class="search-box">
+      <div class="row">
+        <div class="col-md-6">
+          <input
+            (click)="onSearchReactive()"
+            type="text"
+            id="findByParams"
+            class="form-control"
+            [formControl]="params"
+            placeholder="Pesquisar Logs por IP, Requisição e Agente"
+          />
+        </div>
+        <div id="log-list-actions-search" class="col-auto">
+          <button class="btn btn-success" (click)="onSearch()">Pesquisar</button>
+        </div>
+      </div>
+    </div>
     <table id="log-table" class="table table-hover" *ngIf="(logs$ | async) as logs; else loading">
       <thead>
         <tr>
@@ -22,16 +39,16 @@
       <tbody>
         <tr *ngFor="let log of logs">
           <td>{{ log.id }}</td>
-          <td>{{ log.createdAt ? formatingDate_DD_MM_AAAA(log.createdAt) : N / A }}</td>
+          <td>{{ log.createdAt ? this.utils.formatingDate_DD_MM_AAAA(log.createdAt) : N / A }}</td>
           <td>{{ log.ip }}</td>
           <td>{{ log.status }}</td>
           <td>{{ log.request }}</td>
           <td>{{ log.userAgent }}</td>
           <td>
-            <span class="float-right">
-              <button class="btn btn-outline-warning mb-1 btn-sm" (click)="onEdit(log.id)">Atualizar</button>
+            <span id="log-table-actions-line" class="float-right">
+              <button class="btn mb-1 btn-sm" (click)="onEdit(log.id)"><i class="material-icons yellow">edit</i></button>
 
-              <button class="btn btn-outline-danger mb-1 btn-sm" (click)="onDelete(log)">Remover</button>
+              <button class="btn mb-1 btn-sm" (click)="onDelete(log)"><i class="material-icons red">delete</i></button>
             </span>
           </td>
         </tr>
@@ -41,11 +58,3 @@
     <ng-template #loading> <span>Carregando Logs...</span> </ng-template>
   </div>
 </div>
-
-<ng-template #deleteModal>
-  <div class="modal-body text-center">
-    <p>Tem certeza que deseja remover esse log?</p>
-    <button type="button" class="btn btn-default" (click)="onConfirmDelete()">Sim</button>
-    <button type="button" class="btn btn-primary" (click)="onDeclineDelete()">Nao</button>
-  </div>
-</ng-template>
