@@ -40,8 +40,8 @@ ENTREGAS
 
 Detalhes do desenvolvimento
 --------
-##### Rodar a aplicação com o comando npm start, devido ao proxy configurado.
+Rodar a aplicação com o comando __"npm start"__, devido ao proxy configurado.
 
-##### Utilizar a autenticação abaixo diretamente no navegador:
-- User: admin
-- password: smartLog2020
+Utilizar a autenticação abaixo diretamente no navegador:
+- __User:__ admin
+- __password:__ smartLog2020
