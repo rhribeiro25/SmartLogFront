@@ -40,6 +40,7 @@ ENTREGAS
 
 Detalhes do desenvolvimento
 --------
-Utilizar a autenticação abaixo diretamente no navegador:
+*****Rodar a aplicação com o comando npm start, devido ao proxy configurado.
+*****Utilizar a autenticação abaixo diretamente no navegador:
 - User: admin
 - password: smartLog2020
