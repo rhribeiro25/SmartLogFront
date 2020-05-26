@@ -2,8 +2,8 @@ import { Component, OnInit, ViewChild } from "@angular/core";
 import { FormControl } from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";
 import { BsModalRef } from "ngx-bootstrap/modal";
-import { EMPTY, Observable, Subject, Subscriber, Subscription } from "rxjs";
-import { catchError, debounceTime, distinctUntilChanged, map, switchMap, take } from "rxjs/operators";
+import { EMPTY, Subject, Subscription } from "rxjs";
+import { catchError, debounceTime, distinctUntilChanged, map, switchMap, take, filter } from "rxjs/operators";
 import UtilsService from "src/app/shared/utils.service";
 import { AlertModalService } from "../../shared/alert-modal.service";
 import { Log } from "../log";
@@ -19,10 +19,10 @@ export class LogsListaComponent implements OnInit {
   deleteModalRef: BsModalRef;
   @ViewChild("deleteModal", { static: true }) deleteModal;
   @ViewChild("refresh") refresh;
-  logs$: Observable<Log[]>;
+  logs: Log[];
   error$ = new Subject<boolean>();
   logSelecionado: Log;
-
+  sub: Subscription[] = [];
   params = new FormControl();
 
   constructor(
@@ -34,38 +34,73 @@ export class LogsListaComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.onRefresh();
-  }
-
-  onSearchReactive() {
-    this.logs$ = this.params.valueChanges.pipe(
-      map(value => value.trim()),
-      debounceTime(200),
-      distinctUntilChanged(),
-      switchMap(value => this.service.findByParams(value))
+    this.sub.push(
+      this.service
+        .findAll()
+        .pipe(
+          catchError(error => {
+            console.error(error);
+            if (error.status !== 404) this.handleError();
+            this.logs = [];
+            return EMPTY;
+          })
+        )
+        .subscribe(res => (this.logs = res))
+    );
+    this.sub.push(
+      this.params.valueChanges
+        .pipe(
+          map(value => value.trim()),
+          filter(value => value !== null && value !== ""),
+          debounceTime(200),
+          distinctUntilChanged(),
+          switchMap(value =>
+            this.service.findByParams(value).pipe(
+              catchError(error => {
+                console.error(error);
+                if (error.status !== 404) this.handleError();
+                this.logs = [];
+                return EMPTY;
+              })
+            )
+          )
+        )
+        .subscribe(res => (this.logs = res))
     );
   }
 
   onRefresh() {
     this.params.setValue("");
-    this.logs$ = this.service.findAll().pipe(
-      catchError(error => {
-        console.error(error);
-        this.handleError();
-        return EMPTY;
-      })
+    this.sub.push(
+      this.service
+        .findAll()
+        .pipe(
+          catchError(error => {
+            console.error(error);
+            if (error.status !== 404) this.handleError();
+            this.logs = [];
+            return EMPTY;
+          })
+        )
+        .subscribe(res => (this.logs = res))
     );
   }
 
   onSearch() {
     let value = this.params.value;
     if (value && (value = value.trim()) !== "") {
-      this.logs$ = this.service.findByParams(value).pipe(
-        catchError(error => {
-          console.error(error);
-          this.handleError();
-          return EMPTY;
-        })
+      this.sub.push(
+        this.service
+          .findByParams(value)
+          .pipe(
+            catchError(error => {
+              console.error(error);
+              if (error.status !== 404) this.handleError();
+              this.logs = [];
+              return EMPTY;
+            })
+          )
+          .subscribe(res => (this.logs = res))
       );
     }
   }
