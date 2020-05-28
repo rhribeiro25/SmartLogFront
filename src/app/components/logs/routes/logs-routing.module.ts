@@ -1,8 +1,8 @@
 import { NgModule } from "@angular/core";
-import { Routes, RouterModule } from "@angular/router";
-import { LogsListaComponent } from "./logs-lista/logs-lista.component";
-import { LogsFormComponent } from "./logs-form/logs-form.component";
-import { LogResolverGuard } from "./guards/log-resolver.guard";
+import { RouterModule, Routes } from "@angular/router";
+import { LogResolverGuard } from "../guards/log-resolver.guard";
+import { LogsFormComponent } from "../logs-form/logs-form.component";
+import { LogsListaComponent } from "../logs-lista/logs-lista.component";
 
 const routes: Routes = [
   { path: "", component: LogsListaComponent },

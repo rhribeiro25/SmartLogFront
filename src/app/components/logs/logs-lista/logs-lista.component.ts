@@ -3,11 +3,11 @@ import { FormControl } from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";
 import { BsModalRef } from "ngx-bootstrap/modal";
 import { EMPTY, Subject, Subscription } from "rxjs";
-import { catchError, debounceTime, distinctUntilChanged, map, switchMap, take, filter } from "rxjs/operators";
-import UtilsService from "src/app/shared/utils.service";
-import { AlertModalService } from "../../shared/alert-modal.service";
-import { Log } from "../log";
-import { LogsService } from "../logs.service";
+import { catchError, debounceTime, distinctUntilChanged, filter, map, switchMap, take } from "rxjs/operators";
+import { Log } from "src/app/models/log";
+import { AlertModalService } from "src/app/services/alert-modal.service";
+import { LogsService } from "src/app/services/logs.service";
+import UtilsService from "src/app/services/utils.service";
 
 @Component({
   selector: "app-logs-lista",
@@ -18,16 +18,19 @@ import { LogsService } from "../logs.service";
 export class LogsListaComponent implements OnInit {
   deleteModalRef: BsModalRef;
   @ViewChild("deleteModal", { static: true }) deleteModal;
-  @ViewChild("refresh") refresh;
+  @ViewChild("reload") reload;
   logs: Log[];
   error$ = new Subject<boolean>();
   logSelecionado: Log;
   sub: Subscription[] = [];
   params = new FormControl();
+  status = new FormControl();
+  dateFrom = new FormControl();
+  dateTo = new FormControl();
 
   constructor(
     private service: LogsService,
-    private utils: UtilsService,
+    public utils: UtilsService,
     private alertService: AlertModalService,
     private router: Router,
     private route: ActivatedRoute
@@ -67,9 +70,25 @@ export class LogsListaComponent implements OnInit {
         )
         .subscribe(res => (this.logs = res))
     );
+    this.sub.push(
+      this.dateTo.valueChanges
+        .pipe(
+          distinctUntilChanged(),
+          switchMap(value =>
+            this.service.findByCreatedAtFromTo(this.dateFrom.value, value).pipe(
+              catchError(error => {
+                console.error(error);
+                if (error.status !== 404) this.handleError();
+                this.logs = [];
+                return EMPTY;
+              })
+            )
+          )
+        )
+        .subscribe(res => (this.logs = res))
+    );
   }
-
-  onRefresh() {
+  onReload() {
     this.params.setValue("");
     this.sub.push(
       this.service
@@ -84,25 +103,6 @@ export class LogsListaComponent implements OnInit {
         )
         .subscribe(res => (this.logs = res))
     );
-  }
-
-  onSearch() {
-    let value = this.params.value;
-    if (value && (value = value.trim()) !== "") {
-      this.sub.push(
-        this.service
-          .findByParams(value)
-          .pipe(
-            catchError(error => {
-              console.error(error);
-              if (error.status !== 404) this.handleError();
-              this.logs = [];
-              return EMPTY;
-            })
-          )
-          .subscribe(res => (this.logs = res))
-      );
-    }
   }
 
   handleError() {
@@ -128,7 +128,7 @@ export class LogsListaComponent implements OnInit {
           this.alertService.showAlertDanger("Erro ao remover log. Tente novamente mais tarde!");
         },
         success => {
-          this.onRefresh();
+          this.onReload();
           this.alertService.showAlertSuccess("Sucesso ao remover log!");
         }
       );
@@ -137,7 +137,7 @@ export class LogsListaComponent implements OnInit {
   onConfirmDelete() {
     this.service.remove(this.logSelecionado.id).subscribe(
       success => {
-        this.onRefresh();
+        this.onReload();
         this.deleteModalRef.hide();
       },
       error => {

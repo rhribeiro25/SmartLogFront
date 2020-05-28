@@ -1,6 +1,6 @@
 {
-  "name": "requests-http",
-  "version": "0.0.0",
+  "name": "smart-log",
+  "version": "1.0.0",
   "scripts": {
     "ng": "ng",
     "start": "ng serve --proxy-config proxy.conf.json",
@@ -12,11 +12,14 @@
   "private": true,
   "dependencies": {
     "@angular/animations": "^9.0.0",
+    "@angular/cdk": "^9.2.4",
     "@angular/common": "^9.0.0",
     "@angular/compiler": "^9.0.0",
     "@angular/core": "^9.0.0",
     "@angular/fire": "^5.2.1",
     "@angular/forms": "^9.0.0",
+    "@angular/material": "^9.2.4",
+    "@angular/material-moment-adapter": "^9.2.4",
     "@angular/platform-browser": "^9.0.0",
     "@angular/platform-browser-dynamic": "^9.0.0",
     "@angular/router": "^9.0.0",

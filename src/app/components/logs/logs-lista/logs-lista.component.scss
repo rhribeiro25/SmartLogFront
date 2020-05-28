@@ -3,18 +3,7 @@
 }
 
 #log-table #actions {
-  width: 100px;
-}
-
-#log-table #log-table-actions-line {
-  width: 100px;
-  height: 42px;
-  line-height: 42px;
-  text-align: center;
-  cursor: pointer;
-  position: absolute;
-  right: 5px;
-  padding-left: 10px;
+  width: 10%;
 }
 
 #log-table #request {
@@ -31,16 +20,6 @@
   margin-bottom: 0;
   background-color: rgba(0, 0, 0, 0.03);
   border-bottom: 1px solid rgba(0, 0, 0, 0.125);
-}
-
-#log-list-header #log-list-actions {
-  width: 200px;
-  text-align: center;
-  cursor: pointer;
-  position: absolute;
-  top: 10px;
-  right: 5px;
-  padding-left: 10px;
 }
 
 #log-list-body #log-list-actions-search {

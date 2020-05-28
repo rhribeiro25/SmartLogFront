@@ -1,9 +1,9 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { environment } from "../../environments/environment";
-import { CrudService } from "../shared/crud.service";
-import { Log } from "./log";
 import { take } from "rxjs/operators";
+import { environment } from "src/environments/environment";
+import { Log } from "../models/log";
+import { CrudService } from "./crud.service";
 
 @Injectable({
   providedIn: "root"
@@ -15,5 +15,9 @@ export class LogsService extends CrudService<Log> {
 
   findByParams(params: String) {
     return this.http.get<Log[]>(`${environment.BASE_URL}/logs/find-by-params/${params}`).pipe(take(1));
+  }
+
+  findByCreatedAtFromTo(from: String, to: String) {
+    return this.http.get<Log[]>(`${environment.BASE_URL}/logs/find-by-createdat-between/${from}/${to}`).pipe(take(1));
   }
 }

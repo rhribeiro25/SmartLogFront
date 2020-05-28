@@ -2,8 +2,8 @@ import { Location } from "@angular/common";
 import { Component, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { ActivatedRoute } from "@angular/router";
-import { AlertModalService } from "../../shared/alert-modal.service";
-import { LogsService } from "../logs.service";
+import { LogsService } from "src/app/services/logs.service";
+import { AlertModalService } from "src/app/services/alert-modal.service";
 
 @Component({
   selector: "app-logs-form",
