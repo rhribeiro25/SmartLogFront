@@ -3,7 +3,7 @@
 }
 
 #log-table #actions {
-  width: 10%;
+  width: 14%;
 }
 
 #log-table #request {
@@ -11,7 +11,8 @@
 }
 
 #log-list #log-list-body {
-  min-height: 700px !important;
+  height: 700px;
+  overflow-y: scroll;
 }
 
 #log-list-header {

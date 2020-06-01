@@ -1,14 +1,14 @@
 import { CommonModule } from "@angular/common";
 import { NgModule } from "@angular/core";
 import { ReactiveFormsModule } from "@angular/forms";
-import { MatFormFieldModule } from "@angular/material/form-field";
 import { MaterialModule } from "../material/material.module";
-import { LogsFormComponent } from "./logs-form/logs-form.component";
-import { LogsListaComponent } from "./logs-lista/logs-lista.component";
-import { LogsRoutingModule } from "./routes/logs-routing.module";
+import { LogsRoutingModule } from "../../routes/logs-routing.module";
+import { ListComponent } from "./list/list.component";
+import { FormComponent } from "./form/form.component";
+import { UploadComponent } from "./upload/upload.component";
 
 @NgModule({
-  imports: [CommonModule, LogsRoutingModule, ReactiveFormsModule, MatFormFieldModule, MaterialModule],
-  declarations: [LogsListaComponent, LogsFormComponent]
+  imports: [CommonModule, LogsRoutingModule, ReactiveFormsModule, MaterialModule],
+  declarations: [ListComponent, FormComponent, UploadComponent]
 })
 export class LogsModule {}

@@ -12,10 +12,10 @@
           <input
             id="date-from"
             type="text"
-            id="find-by-params"
+            id="find-by-ip"
             class="form-control"
-            [formControl]="params"
-            placeholder="IP, Requisição, Agente,"
+            [formControl]="ip"
+            placeholder="192.168.0.125"
           />
         </div>
         <div class="col-md-2">
@@ -25,7 +25,7 @@
             [matDatepicker]="pickerFrom"
             [formControl]="dateFrom"
             (click)="pickerFrom.open()"
-            placeholder="Criação de"
+            placeholder="1/06/2020"
             class="form-control"
           />
           <mat-datepicker #pickerFrom></mat-datepicker>
@@ -37,14 +37,14 @@
             [matDatepicker]="pickerTo"
             [formControl]="dateTo"
             (click)="pickerTo.open()"
-            placeholder="Criação até"
+            placeholder="30/06/2020"
             class="form-control"
             [disabled]="!this.dateFrom.value"
           />
           <mat-datepicker #pickerTo></mat-datepicker>
         </div>
         <div class="col-md-2">
-          <input type="text" id="find-by-status" class="form-control" [formControl]="status" placeholder="Status" />
+          <input type="text" id="find-by-status" class="form-control" [formControl]="status" placeholder="201" />
         </div>
       </div>
     </div>
@@ -59,7 +59,10 @@
           <th>Agente</th>
           <th id="actions">
             <span id="log-table-reload" class="float-right">
-              <button type="button" class="btn mb-1 btn-sm" [routerLink]="['novo']">
+              <button type="button" class="btn mb-1 btn-sm" [routerLink]="['upload']">
+                <span class="material-icons pumpkin"> cloud_upload </span>
+              </button>
+              <button type="button" class="btn mb-1 btn-sm" [routerLink]="['create']">
                 <span class="material-icons green"> note_add </span>
               </button>
               <button type="button" class="btn mb-1 btn-sm" (click)="onReload()">

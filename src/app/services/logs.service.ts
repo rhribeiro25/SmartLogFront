@@ -13,11 +13,23 @@ export class LogsService extends CrudService<Log> {
     super(http, `${environment.BASE_URL}/logs`);
   }
 
-  findByParams(params: String) {
-    return this.http.get<Log[]>(`${environment.BASE_URL}/logs/find-by-params/${params}`).pipe(take(1));
+  findByIp(ip: String) {
+    return this.http.get<Log[]>(`${environment.BASE_URL}/logs/find-by-ip/${ip}`).pipe(take(1));
   }
 
   findByCreatedAtFromTo(from: String, to: String) {
     return this.http.get<Log[]>(`${environment.BASE_URL}/logs/find-by-createdat-between/${from}/${to}`).pipe(take(1));
+  }
+
+  findByStatus(status: number) {
+    console.log(status);
+    return this.http.get<Log[]>(`${environment.BASE_URL}/logs/find-by-status/${status}`).pipe(take(1));
+  }
+
+  createByBatch(formData: FormData) {
+    return this.http.post(`${environment.BASE_URL}/logs/create-by-batch`, formData, {
+      observe: "events",
+      reportProgress: true
+    });
   }
 }

@@ -1,0 +1,39 @@
+.upload-file > input {
+  display: none;
+}
+
+.upload-file i {
+  width: 80px;
+  cursor: pointer;
+  padding-left: 10px;
+}
+
+#file-list {
+  height: 621px;
+  overflow: auto;
+}
+
+#label-upload {
+  height: 48px;
+  position: relative;
+  bottom: 10px;
+}
+
+#upload-content {
+  margin: auto;
+  margin-bottom: 0;
+  height: 660px !important;
+}
+
+.progress {
+  height: 38px;
+}
+
+#log-upload-actions {
+  position: absolute;
+  right: 10px;
+}
+
+#log-upload-header {
+  text-align: center;
+}

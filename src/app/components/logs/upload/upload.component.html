@@ -1,0 +1,36 @@
+<div id="log-upload" class="card mt-3">
+  <div id="log-upload-header" class="card-header">
+    <div><h4>Criação de Logs em lote</h4></div>
+  </div>
+  <div id="log-list-body" class="card-body">
+    <div id="upload-content">
+      <mat-list id="file-list">
+        <div mat-subheader>Files</div>
+        <mat-list-item *ngFor="let file of fileList">
+          <div mat-line>{{ file }}</div>
+          <i class="material-icons"> note_add </i>
+        </mat-list-item>
+      </mat-list>
+      <div class="form-row">
+        <div class="col-sm-1">
+          <div class="upload-file">
+            <label id="label-upload" for="file-input">
+              <i class="material-icons pumpkin md-60" aria-hidden="true"> cloud_upload </i>
+            </label>
+            <input type="file" class="upload-file-input" id="file-input" (change)="onChange($event)" multiple />
+          </div>
+        </div>
+        <div class="col-sm-10">
+          <div class="progress">
+            <div class="progress-bar" role="progressbar" [style.width]="progress + '%'">{{ progress }}%</div>
+          </div>
+        </div>
+        <div class="col-sm-1">
+          <div id="log-upload-actions">
+            <button id="cancel" type="button" class="btn btn-secondary" (click)="onCancel()">Cancelar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

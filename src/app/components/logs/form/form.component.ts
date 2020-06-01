@@ -7,10 +7,10 @@ import { AlertModalService } from "src/app/services/alert-modal.service";
 
 @Component({
   selector: "app-logs-form",
-  templateUrl: "./logs-form.component.html",
-  styleUrls: ["./logs-form.component.scss"]
+  templateUrl: "./form.component.html",
+  styleUrls: ["./form.component.scss"]
 })
-export class LogsFormComponent implements OnInit {
+export class FormComponent implements OnInit {
   form: FormGroup;
   submitted = false;
 
