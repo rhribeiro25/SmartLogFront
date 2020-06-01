@@ -1,0 +1,95 @@
+<div id="log-list" class="card mt-3">
+  <div id="log-list-header" class="card-header">
+    <div><h4>Listagem de Logs</h4></div>
+  </div>
+  <div id="log-list-body" class="card-body">
+    <div id="log-list-panel-search" class="search-box">
+      <div class="row">
+        <div class="col-md-1">
+          <H4><label id="filter-label">Filtros:</label></H4>
+        </div>
+        <div class="col-md-5">
+          <input
+            id="date-from"
+            type="text"
+            id="find-by-ip"
+            class="form-control"
+            [formControl]="ip"
+            placeholder="192.168.0.125"
+          />
+        </div>
+        <div class="col-md-2">
+          <input
+            id="date-from"
+            matInput
+            [matDatepicker]="pickerFrom"
+            [formControl]="dateFrom"
+            (click)="pickerFrom.open()"
+            placeholder="1/06/2020"
+            class="form-control"
+          />
+          <mat-datepicker #pickerFrom></mat-datepicker>
+        </div>
+        <div class="col-md-2">
+          <input
+            id="date-to"
+            matInput
+            [matDatepicker]="pickerTo"
+            [formControl]="dateTo"
+            (click)="pickerTo.open()"
+            placeholder="30/06/2020"
+            class="form-control"
+            [disabled]="!this.dateFrom.value"
+          />
+          <mat-datepicker #pickerTo></mat-datepicker>
+        </div>
+        <div class="col-md-2">
+          <input type="text" id="find-by-status" class="form-control" [formControl]="status" placeholder="201" />
+        </div>
+      </div>
+    </div>
+    <table id="log-table" class="table table-hover" *ngIf="logs; else loading">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Criação</th>
+          <th>IP</th>
+          <th>Status</th>
+          <th id="request">Requisição</th>
+          <th>Agente</th>
+          <th id="actions">
+            <span id="log-table-reload" class="float-right">
+              <button type="button" class="btn mb-1 btn-sm" [routerLink]="['upload']">
+                <span class="material-icons pumpkin"> cloud_upload </span>
+              </button>
+              <button type="button" class="btn mb-1 btn-sm" [routerLink]="['create']">
+                <span class="material-icons green"> note_add </span>
+              </button>
+              <button type="button" class="btn mb-1 btn-sm" (click)="onReload()">
+                <i class="material-icons blue">cached</i>
+              </button>
+            </span>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let log of logs">
+          <td>{{ log.id }}</td>
+          <td>{{ log.createdAt ? this.utils.formatingDate_DD_MM_AAAA(log.createdAt) : "N/A" }}</td>
+          <td>{{ log.ip }}</td>
+          <td>{{ log.status }}</td>
+          <td>{{ log.request }}</td>
+          <td>{{ log.userAgent }}</td>
+          <td>
+            <span id="log-table-actions-line" class="float-right">
+              <button class="btn mb-1 btn-sm" (click)="onEdit(log.id)"><i class="material-icons yellow">edit</i></button>
+              <button class="btn mb-1 btn-sm" (click)="onDelete(log)"><i class="material-icons red">delete</i></button>
+            </span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <ng-template #loading> <span>Carregando Logs...</span> </ng-template>
+  </div>
+</div>

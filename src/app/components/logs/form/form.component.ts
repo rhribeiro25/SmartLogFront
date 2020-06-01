@@ -2,15 +2,15 @@ import { Location } from "@angular/common";
 import { Component, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { ActivatedRoute } from "@angular/router";
-import { AlertModalService } from "../../shared/alert-modal.service";
-import { LogsService } from "../logs.service";
+import { LogsService } from "src/app/services/logs.service";
+import { AlertModalService } from "src/app/services/alert-modal.service";
 
 @Component({
   selector: "app-logs-form",
-  templateUrl: "./logs-form.component.html",
-  styleUrls: ["./logs-form.component.scss"]
+  templateUrl: "./form.component.html",
+  styleUrls: ["./form.component.scss"]
 })
-export class LogsFormComponent implements OnInit {
+export class FormComponent implements OnInit {
   form: FormGroup;
   submitted = false;
 

@@ -1,5 +1,5 @@
-import { HttpClient, HttpHeaders } from "@angular/common/http";
-import { delay, tap, take } from "rxjs/operators";
+import { HttpClient } from "@angular/common/http";
+import { delay, take } from "rxjs/operators";
 
 export class CrudService<T> {
   constructor(protected http: HttpClient, private API_URL) {}

@@ -1,15 +1,15 @@
-import { Injectable } from '@angular/core';
-import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
-import { AlertModalComponent } from './alert-modal/alert-modal.component';
-import { ConfirmModalComponent } from './confirm-modal/confirm-modal.component';
+import { Injectable } from "@angular/core";
+import { BsModalRef, BsModalService } from "ngx-bootstrap/modal";
+import { AlertModalComponent } from "../shared/pop-up/alert-modal/alert-modal.component";
+import { ConfirmModalComponent } from "../shared/pop-up/confirm-modal/confirm-modal.component";
 
 export enum AlertTypes {
-  DANGER = 'danger',
-  SUCCESS = 'success'
+  DANGER = "danger",
+  SUCCESS = "success"
 }
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root"
 })
 export class AlertModalService {
   constructor(private modalService: BsModalService) {}
